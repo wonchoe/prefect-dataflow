@@ -1,4 +1,4 @@
-from prefect import flow, task
+from prefect import flow, task, get_run_logger
 import pandas as pd
 
 @task
@@ -10,7 +10,7 @@ def load_data(path: str) -> pd.DataFrame:
 @task
 def top_expensive(df: pd.DataFrame, n: int = 10):
     top = df.sort_values(by="price", ascending=False).head(n)
-    print(top[["name", "neighbourhood", "price"]])
+    logger.info(top[["name", "neighbourhood", "price"]].to_string(index=False))
     return top
 
 @flow

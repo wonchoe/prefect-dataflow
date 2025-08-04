@@ -2,4 +2,7 @@ name: airbnb-demo
 flow_name: airbnb_flow
 entrypoint: airbnb_flow.py:airbnb_flow
 work_pool:
-  name: local-pool
+  name: lambda-pool
+  python_dependencies:
+    - prefect==2.14.12
+    - pandas==2.2.2

@@ -1,0 +1,5 @@
+name: airbnb-demo
+flow_name: airbnb_flow
+entrypoint: airbnb_flow.py:airbnb_flow
+work_pool:
+  name: local-pool

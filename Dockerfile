@@ -1,9 +1,10 @@
-FROM python:3.10-slim
+FROM prefecthq/prefect:2.14-python3.10
 
 WORKDIR /opt/prefect
 
-COPY requirements.txt .
+COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Prefect в контейнері буде запускати твій flow сам — нічого вручну не треба
+COPY . .
+
 CMD ["prefect", "worker", "start", "--pool", "ecs-pool"]

@@ -2,7 +2,15 @@ name: airbnb-demo
 flow_name: airbnb_flow
 entrypoint: airbnb_flow.py:airbnb_flow
 work_pool:
-  name: lambda-pool
-  python_dependencies:
-    - prefect==2.14.12
-    - pandas==2.2.2
+  name: ecs-pool
+  job_variables:
+    image: wonchoe/prefect-worker:latest
+    cpu: 256
+    memory: 512
+    env:
+      PREFECT_API_URL: http://3.81.77.73:4200/api
+      AWS_REGION: us-east-1
+pull:
+  - prefect.deployments.steps.git_clone:
+      repository: https://github.com/wonchoe/prefect-dataflow.git
+      branch: main
